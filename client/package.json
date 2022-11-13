@@ -1,0 +1,40 @@
+{
+    "name": "spotify-profile",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.10.4",
+        "@emotion/styled": "^11.10.4",
+        "@fontsource/roboto": "^4.5.8",
+        "@mui/icons-material": "^5.10.9",
+        "@mui/material": "^5.10.9",
+        "@tanstack/react-query": "^4.12.0",
+        "dotenv": "^16.0.3",
+        "eslint": "^8.25.0",
+        "i": "^0.3.7",
+        "lodash": "^4.17.21",
+        "npm": "^8.19.3",
+        "or": "^0.2.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.4.2",
+        "tss-react": "^4.4.1"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
+        "@types/react-router-dom": "^5.3.3",
+        "@typescript-eslint/eslint-plugin": "^5.40.1",
+        "@vitejs/plugin-react": "^2.1.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.7.1",
+        "typescript": "^4.6.4",
+        "vite": "^3.2.2"
+    }
+}

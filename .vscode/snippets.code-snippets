@@ -1,0 +1,25 @@
+{
+    "createUseStyles Theme": {
+        "prefix": ["createUseStyles"],
+        "body": [
+            "const useStyles = createUseStyles((theme) => ({",
+            "\troot: {",
+            "\t\t${1:cssPropName}: ${1:cssPropValue}",
+            "\t}",
+            "}));"
+        ],
+        "description": "useCreateStyles block for styles"
+    },
+
+    "createUseStyles No-Theme": {
+        "prefix": ["createUseStyles"],
+        "body": [
+            "const useStyles = createUseStyles({",
+            "\troot: {",
+            "\t\t${1:cssPropName}: ${1:cssPropValue}",
+            "\t}",
+            "});"
+        ],
+        "description": "useCreateStyles block for styles"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "johnpapa.vscode-peacock",
+        "eliostruyf.vscode-typescript-exportallmodules",
+        "mikestead.dotenv",
+        "naumovs.color-highlight",
+        "steoates.autoimport",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+    ]
+}
