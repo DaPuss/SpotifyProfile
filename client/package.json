@@ -10,7 +10,8 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "lint": "eslint"
+        "lint": "eslint",
+        "tsc": "./node_modules/typescript/bin/tsc"
     },
     "dependencies": {
         "@emotion/react": "^11.10.4",
