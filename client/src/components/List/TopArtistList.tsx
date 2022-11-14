@@ -39,7 +39,7 @@ const TopArtistList = ({ isPageView, variant, limit }: Props) => {
                     seeMoreRoute="/artists"
                     title="Top Artists of All Time"
                     isPageView={isPageView}
-                    isLoading={isTopArtistsLoading}
+                    isLoading={isTopArtistsLoading || !topArtists}
                 >
                     {topArtists &&
                         topArtists.items

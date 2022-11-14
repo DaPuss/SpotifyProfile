@@ -16,7 +16,7 @@ const TopTrackList = ({ isPageView, variant, limit = 50 }: Props) => {
             seeMoreRoute="/tracks"
             title="Top Tracks of All Time"
             isPageView={isPageView}
-            isLoading={isLoading || !!data}
+            isLoading={isLoading || !data}
         >
             {data &&
                 data.items.map((item: Track, index: number) => (

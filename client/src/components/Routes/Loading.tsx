@@ -9,9 +9,10 @@ export default Loading
 
 const useStyles = makeStyles()(() => ({
     container: {
-        minWidth: '100vw',
-        maxHeight: '100vh',
+        minWidth: '50vw',
+        minHeight: '90vh',
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
     },
 }))
