@@ -1,13 +1,13 @@
 import { Avatar, Container, Stack, Typography } from '@mui/material'
 import { Theme } from '@mui/material/styles'
-import startCase from 'lodash/startCase'
+import { startCase } from 'lodash'
 import { useParams } from 'react-router-dom'
 import { useFetchArtist } from '../api/useFetchArtist'
 import { makeStyles } from '../utils/Theme'
 import Loading from './Routes/Loading'
 
 const Artist = () => {
-    const { artistId } = useParams<string>()
+    const { artistId } = useParams<{ artistId: string }>()
     const { data, isLoading } = useFetchArtist(artistId)
     const classes = useStyles().classes
 

@@ -9,7 +9,7 @@ import Loading from './Routes/Loading'
 import TrackFeatureTable from './TrackFeatureTable'
 
 const Track = () => {
-    const { trackId } = useParams<string>()
+    const { trackId } = useParams<{ trackId: string }>()
 
     const { data: trackFeatures, isLoading: isTrackFeaturesLoading } =
         useFetchTrackFeatures(trackId)

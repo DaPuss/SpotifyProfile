@@ -3,7 +3,7 @@ import { useSpotify } from '../hooks/useSpotify'
 import { QueryRootPlaylistTracks } from './types'
 
 export const useFetchPlaylist = (playlistId?: string) => {
-    const { callEndpoint, user } = useSpotify()
+    const { callEndpoint } = useSpotify()
 
     const { isLoading, error, data } = useQuery({
         queryKey: [`playlist-${playlistId}`],
