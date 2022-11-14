@@ -3,8 +3,9 @@ import { Theme } from '@mui/material/styles'
 import { makeStyles } from '../../utils/Theme'
 const Login = () => {
     const classes = useStyles()
+    //TODO upadte env
     const LOGIN_URI =
-        import.meta.env.VITE_SPOTIFY_CLIENT_ID !== 'production'
+        import.meta.env.VITE_SPOTIFY_ENVIRONMENT !== 'production'
             ? 'http://localhost:8888/login'
             : 'https://spotify-profile.herokuapp.com/login'
 

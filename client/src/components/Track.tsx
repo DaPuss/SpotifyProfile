@@ -2,26 +2,35 @@ import { Container, Stack, Typography } from '@mui/material'
 import { Theme } from '@mui/material/styles'
 import { useParams } from 'react-router-dom'
 import { useFetchTrack } from '../api/useFetchTrack'
+import { useFetchTrackAnalysis } from '../api/useFetchTrackAnalysis'
+import { useFetchTrackFeatures } from '../api/useFetchTrackFeatures'
 import { makeStyles } from '../utils/Theme'
 import Loading from './Routes/Loading'
 import TrackFeatureTable from './TrackFeatureTable'
 
 const Track = () => {
     const { trackId } = useParams<string>()
-    const { data: trackData, isLoading: trackLoading } = useFetchTrack(trackId)
 
+    const { data: trackFeatures, isLoading: isTrackFeaturesLoading } =
+        useFetchTrackFeatures(trackId)
+    const { data: trackAnalysisData, isLoading: trackAnalysLoading } =
+        useFetchTrackAnalysis(trackId)
+    const { data: trackData, isLoading: trackLoading } = useFetchTrack(trackId)
     const classes = useStyles().classes
 
-    if (trackLoading || !trackData) return <Loading />
+    const isLoading =
+        isTrackFeaturesLoading || trackAnalysLoading || trackLoading
+    const hasData = !!trackFeatures && !!trackAnalysisData && !!trackData
+
+    if (isLoading || !hasData) return <Loading />
 
     const artists = trackData.artists.map((artist) => artist.name).join(', ')
-
     return (
         <Container className={classes.container}>
             <Container className={classes.topContainer}>
                 <img
                     className={classes.coverImage}
-                    src={trackData?.album.images[2]?.url}
+                    src={trackData?.album.images[0]?.url}
                 />
                 <Stack gap={0.5} paddingLeft={2}>
                     <Typography variant="h4" className={classes.bold}>
@@ -46,7 +55,11 @@ const Track = () => {
                     </a>
                 </Stack>
             </Container>
-            <TrackFeatureTable trackId={trackId} />
+            <TrackFeatureTable
+                trackData={trackData}
+                trackFeatures={trackFeatures}
+                trackAnalysisData={trackAnalysisData}
+            />
         </Container>
     )
 }
@@ -55,9 +68,10 @@ export default Track
 
 const useStyles = makeStyles()((theme: Theme) => ({
     container: {
+        minWidth: '90vw !important',
+        maxWidth: '100vw !important',
         display: 'flex',
-        flexGrow: 1,
-        gap: '2rem',
+        gap: '4rem',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
@@ -92,12 +106,5 @@ const useStyles = makeStyles()((theme: Theme) => ({
         '&:hover': {
             backgroundColor: '#1ed760',
         },
-    },
-    tableContainer: {
-        display: 'flex',
-    },
-    tableCell: {
-        display: 'inline-block',
-        border: '1px solid #818181',
     },
 }))

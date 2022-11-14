@@ -72,6 +72,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
         justifyContent: 'space-between',
         position: 'fixed',
         left: 0,
+        top: 0,
         backgroundColor: 'black',
         width: 100,
         height: '100vh',

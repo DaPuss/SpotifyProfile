@@ -20,7 +20,7 @@ function MenuItem({
             <NavLink
                 className={({ isActive }) =>
                     `${classes.menuItem} ${
-                        isActive ? classes.menuItemActive : undefined
+                        isActive ? classes.menuItemActive : ''
                     }`
                 }
                 to={route}
@@ -55,6 +55,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
         paddingBottom: '1rem',
         alignItems: 'center',
         textDecoration: 'none !important',
+        outline: 'none',
         '&:hover': {
             border: 'none !important',
             color: 'white',
@@ -63,9 +64,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
             '@media screen and (max-width: 600px)': {
                 boxShadow: '0px 20px 20px -20px rgba(30,215,96,0.75) inset',
             },
-        },
-        '&:focus': {
-            textDecoration: 'none !important',
         },
     },
     menuItemActive: {

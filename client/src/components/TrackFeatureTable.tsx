@@ -1,61 +1,70 @@
 import { Container, Typography } from '@mui/material'
 import { Theme } from '@mui/material/styles'
-import { useFetchTrackFeatures } from '../api/useFetchTrackFeatures'
+import { Track, TrackAnalysis, TrackFeatures } from '../api/types'
+import { millisToMinutesAndSeconds } from '../utils/millisToMinutesAndSeconds'
 import { makeStyles } from '../utils/Theme'
-import Loading from './Routes/Loading'
 
-const TrackFeatureTable = ({ trackId }: { trackId: string | undefined }) => {
+const TrackFeatureTable = ({
+    trackData,
+    trackFeatures,
+    trackAnalysisData,
+}: {
+    trackData: Track
+    trackFeatures: TrackFeatures
+    trackAnalysisData: TrackAnalysis
+}) => {
     const classes = useStyles().classes
-    const { data: trackFeatures, isLoading: isTrackFeaturesLoading } =
-        useFetchTrackFeatures(trackId)
-    if (!trackFeatures || isTrackFeaturesLoading) return <Loading />
-
+    const TableCell = ({
+        title,
+        content,
+    }: {
+        title: string
+        content: string | number
+    }) => {
+        return (
+            <Container className={classes.tableCell}>
+                <Typography variant={'h4'} className={classes.text}>
+                    {content}
+                </Typography>
+                <Typography variant={'h6'} className={classes.text}>
+                    {title}
+                </Typography>
+            </Container>
+        )
+    }
     return (
         <Container className={classes.tableContainer}>
-            <Container className={classes.tableRowContainer}>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.duration_ms}</Typography>
-                    <Typography>Duration</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.key}</Typography>
-                    <Typography>Key</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.mode}</Typography>
-                    <Typography>Modality</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.time_signature}</Typography>
-                    <Typography>Time Signature</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.tempo}</Typography>
-                    <Typography>Tempo (BPM)</Typography>
-                </Container>
-            </Container>
-            <Container className={classes.tableRowContainer}>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.duration_ms}</Typography>
-                    <Typography>Popularity</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.key}</Typography>
-                    <Typography>Bars</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.key}</Typography>
-                    <Typography>Beats</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.key}</Typography>
-                    <Typography>Sections</Typography>
-                </Container>
-                <Container className={classes.tableCell}>
-                    <Typography>{trackFeatures.key}</Typography>
-                    <Typography>Segments</Typography>
-                </Container>
-            </Container>
+            <TableCell
+                title={'Duration'}
+                content={millisToMinutesAndSeconds(trackFeatures.duration_ms)}
+            />
+            <TableCell title={'Key'} content={trackFeatures.key} />
+            <TableCell
+                title={'Modality'}
+                content={trackFeatures.mode === 1 ? 'Major' : 'Minor'}
+            />
+            <TableCell
+                title={'Signature'}
+                content={trackFeatures.time_signature}
+            />
+            <TableCell title={'BPM'} content={trackFeatures.tempo} />
+            <TableCell
+                title={'Popularity'}
+                content={`${trackData.popularity}%`}
+            />
+            <TableCell title={'Bars'} content={trackAnalysisData.bars.length} />
+            <TableCell
+                title={'Beats'}
+                content={trackAnalysisData.beats.length}
+            />
+            <TableCell
+                title={'Sections'}
+                content={trackAnalysisData.sections.length}
+            />
+            <TableCell
+                title={'Segments'}
+                content={trackAnalysisData.segments.length}
+            />
         </Container>
     )
 }
@@ -65,19 +74,34 @@ export default TrackFeatureTable
 const useStyles = makeStyles()((theme: Theme) => ({
     text: {
         color: '#818181',
-    },
-    bold: {
         fontWeight: 600,
+        whiteSpace: 'nowrap',
     },
-    tableContainer: {},
-    tableRowContainer: {
-        display: 'flex',
-        padding: '0 !important',
+    tableContainer: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridTemplateRows: 'repeat(2, 1fr)',
+        '@media (max-width: 1500px)': {
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateRows: 'repeat(3, 1fr)',
+        },
+        '@media (max-width: 1200px)': {
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateRows: 'repeat(4, 1fr)',
+        },
+        '@media (max-width: 900px)': {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateRows: 'repeat(5, 1fr)',
+        },
+        '@media (max-width: 650px)': {
+            gridTemplateColumns: 'repeat(1, 1fr)',
+            gridTemplateRows: 'repeat(10, 1fr)',
+        },
     },
     tableCell: {
         padding: '2rem 4rem !important',
-        display: 'inline-block',
         border: '1px solid #818181',
         color: '#818181',
+        textAlign: 'center',
     },
 }))

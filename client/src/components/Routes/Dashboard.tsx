@@ -8,6 +8,7 @@ import { makeStyles } from '../../utils/Theme'
 import Button from '../Button'
 import TopArtistList from '../List/TopArtistList'
 import TopTrackList from '../List/TopTrackList'
+import Loading from './Loading'
 const Dashboard = () => {
     const { data: playlists, isLoading: isLoadingPlaylist } =
         useFetchPlaylists()
@@ -17,8 +18,9 @@ const Dashboard = () => {
     const { logout } = useSpotify()
     const classes = useStyles()
 
-    if (isLoadingPlaylist || isLoadingFollowing || isLoadingUser) return null
-    console.log(user)
+    if (isLoadingPlaylist || isLoadingFollowing || isLoadingUser)
+        return <Loading />
+    if (!playlists || !following || !user) return <Loading />
     return (
         <Stack
             className={classes.classes.container}
@@ -84,7 +86,7 @@ const Dashboard = () => {
             </Stack>
             <Button onClick={() => logout && logout()}>Log out</Button>
             <Stack
-                direction={{ xs: 'column', sm: 'row' }}
+                direction={{ xs: 'column', md: 'row' }}
                 className={classes.classes.listContainer}
             >
                 <TopArtistList
@@ -105,7 +107,6 @@ const Dashboard = () => {
 export default Dashboard
 
 const useStyles = makeStyles()((theme: Theme) => ({
-    temp: {},
     container: {
         paddingTop: '2rem',
         display: 'flex',

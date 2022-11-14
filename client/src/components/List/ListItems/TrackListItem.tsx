@@ -1,20 +1,13 @@
 import { Container, ListItem, Tooltip, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { Track } from '../../../api/types'
+import { millisToMinutesAndSeconds } from '../../../utils/millisToMinutesAndSeconds'
 import { makeStyles } from '../../../utils/Theme'
 
 const TrackListItem = ({ item }: { item: Track }) => {
     const classes = useStyles().classes
     const navigate = useNavigate()
     const artists = item.artists.map((artist) => artist.name).join(', ')
-
-    const millisToMinutesAndSeconds = (millis: number) => {
-        var minutes = Math.floor(millis / 60000)
-        var seconds = (millis % 60000) / 1000
-        return seconds == 60
-            ? minutes + 1 + ':00'
-            : minutes + ':' + (seconds < 10 ? '0' : '') + seconds.toFixed(0)
-    }
     return (
         <ListItem
             className={classes.container}

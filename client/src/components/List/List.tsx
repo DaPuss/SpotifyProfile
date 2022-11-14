@@ -4,6 +4,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { makeStyles } from '../../utils/Theme'
 import Button from '../Button'
+import Loading from '../Routes/Loading'
 interface Props {
     title: string
     isPageView: boolean
@@ -11,9 +12,17 @@ interface Props {
     seeMoreRoute: string
     children: React.ReactNode
 }
-const List = ({ title, isPageView, seeMoreRoute, children }: Props) => {
+const List = ({
+    title,
+    isPageView,
+    isLoading,
+    seeMoreRoute,
+    children,
+}: Props) => {
     const classes = useStyles().classes
     const navigate = useNavigate()
+
+    if (isLoading) return <Loading />
     return (
         <Container>
             {!isPageView && (
@@ -43,6 +52,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
     seeMoreButton: {
         marginLeft: 'auto',
+        whiteSpace: 'nowrap',
     },
     container: {
         paddingTop: '2rem',
