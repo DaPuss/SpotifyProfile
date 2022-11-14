@@ -8,7 +8,7 @@
   },
   "scripts": {
     "client:install": "cd client && yarn",
-    "client": "cd client && yarn run dev",
+    "client": "cd client && yarn run start",
     "server": "node server",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server",
