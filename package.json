@@ -24,6 +24,7 @@
     "request": "~2.88.0"
   },
   "devDependencies": {
+    "typescript": "^4.6.4",
     "concurrently": "^5.1.0"
   }
 }
