@@ -1,6 +1,6 @@
 import { Avatar, Container, Stack, Typography } from '@mui/material'
 import { Theme } from '@mui/material/styles'
-import { startCase } from 'lodash'
+import startCase from 'lodash/startCase'
 import { useParams } from 'react-router-dom'
 import { useFetchArtist } from '../api/useFetchArtist'
 import { makeStyles } from '../utils/Theme'
