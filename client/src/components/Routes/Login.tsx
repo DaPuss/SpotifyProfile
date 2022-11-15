@@ -9,7 +9,8 @@ const Login = () => {
     //         ? 'http://localhost:8888/login'
     //         : 'https://dyl-spotify-app.herokuapp.com/login'
 
-    const LOGIN_URI = 'https://dyl-spotify-app.herokuapp.com/login'
+    //const LOGIN_URI = 'https://dyl-spotify-app.herokuapp.com/login'
+    const LOGIN_URI = 'http://localhost:8888/login'
 
     return (
         <Container className={classes.classes.container}>

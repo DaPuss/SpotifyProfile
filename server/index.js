@@ -3,12 +3,17 @@
 // https://github.com/spotify/web-api-auth-examples
 
 require("dotenv").config();
-
+const env = process.env.VITE_SPOTIFY_ENVIRONMENT;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:8888/callback";
 let FRONTEND_URI = process.env.FRONTEND_URI || "http://127.0.0.1:5173";
 const PORT = process.env.PORT || 8888;
+
+if (env == "develop") {
+  REDIRECT_URI = "http://localhost:8888/callback";
+  FRONTEND_URI = "http://127.0.0.1:5173";
+}
 
 const express = require("express");
 const request = require("request");
@@ -171,7 +176,7 @@ if (cluster.isMaster) {
 
   // All remaining requests return the React app, so it can handle routing.
   app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "../dist/", "index.html"));
+    response.sendFile(path.resolve(__dirname, "../client", "index.html"));
   });
 
   app.listen(PORT, function () {
