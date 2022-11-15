@@ -60,10 +60,10 @@ if (cluster.isMaster) {
   const app = express();
 
   // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, "../client/build")));
+  app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
   app
-    .use(express.static(path.resolve(__dirname, "../client/build")))
+    .use(express.static(path.resolve(__dirname, "../client/dist")))
     .use(cors())
     .use(cookieParser())
     .use(
@@ -76,10 +76,10 @@ if (cluster.isMaster) {
         ],
       })
     )
-    .use(express.static(path.resolve(__dirname, "../client/build")));
+    .use(express.static(path.resolve(__dirname, "../client/dist")));
 
   app.get("/", function (req, res) {
-    res.render(path.resolve(__dirname, "../client/build/index.html"));
+    res.render(path.resolve(__dirname, "../client/dist/index.html"));
   });
 
   app.get("/login", function (req, res) {
@@ -176,7 +176,7 @@ if (cluster.isMaster) {
 
   // All remaining requests return the React app, so it can handle routing.
   app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "../dist", "index.html"));
+    response.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
   });
 
   app.listen(PORT, function () {
