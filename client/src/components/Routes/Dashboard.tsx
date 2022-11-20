@@ -60,7 +60,9 @@ const Dashboard = () => {
                         className={classes.classes.statValue}
                         variant="h5"
                     >
-                        {following?.total ? following.total : 0}
+                        {following?.artists?.total
+                            ? following.artists.total
+                            : 0}
                     </Typography>
                     <Typography
                         className={classes.classes.statHeader}

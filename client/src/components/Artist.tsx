@@ -11,7 +11,7 @@ const Artist = () => {
     const { data, isLoading } = useFetchArtist(artistId)
     const classes = useStyles().classes
 
-    if (isLoading) return <Loading />
+    if (isLoading || !data) return <Loading />
 
     return (
         <Container className={classes.container}>

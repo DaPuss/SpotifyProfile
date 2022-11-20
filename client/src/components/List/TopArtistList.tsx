@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material'
 import { Artist, querylength } from '../../api/types'
 import { useFetchTopArtists } from '../../api/useFetchTopArtists'
+import Loading from '../Routes/Loading'
 import List from './List'
 import ArtistListItem from './ListItems/ArtistListItem'
-
 interface Props {
     isPageView: boolean
     variant: querylength
@@ -13,6 +13,8 @@ interface Props {
 const TopArtistList = ({ isPageView, variant, limit }: Props) => {
     const { data: topArtists, isLoading: isTopArtistsLoading } =
         useFetchTopArtists(variant, limit)
+
+    if (isTopArtistsLoading) return <Loading />
 
     return (
         <>

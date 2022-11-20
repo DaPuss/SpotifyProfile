@@ -1,8 +1,13 @@
+import { CircularProgress } from '@mui/material'
 import { makeStyles } from '../../utils/Theme'
 
 const Loading = () => {
     const classes = useStyles().classes
-    return <div className={classes.container}>Loading...</div>
+    return (
+        <div className={classes.container}>
+            <CircularProgress color="success" />
+        </div>
+    )
 }
 
 export default Loading

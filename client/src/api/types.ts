@@ -191,14 +191,9 @@ export interface QueryRootPlaylist {
 }
 
 export interface QueryRootFollowing {
-    href: string
-    items: any[]
-    limit: number
-    next: string
-    cursors: {
-        after: string
+    artists: {
+        total: number
     }
-    total: number
 }
 export interface TrackFeatures {
     danceability: number
